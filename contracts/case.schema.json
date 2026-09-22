@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "低价投标质量预警案件事件流",
+  "type": "object",
+  "required": [
+    "domain",
+    "version",
+    "case_id",
+    "subject",
+    "bidders",
+    "events"
+  ],
+  "properties": {
+    "domain": { "const": "low-bid-quality-warning" },
+    "version": { "type": "integer", "minimum": 1 },
+    "case_id": { "type": "string", "minLength": 1 },
+    "subject": { "type": "string", "minLength": 1 },
+    "bidders": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "occurred_at", "received_at", "payload"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "type": {
+            "type": "string",
+            "enum": [
+              "tender_rule",
+              "bid_version",
+              "verifiable_cost",
+              "capacity",
+              "delivery_history",
+              "inspection",
+              "complaint",
+              "affiliate",
+              "joint_bid",
+              "material_price_change",
+              "appeal_supplement",
+              "price_enforcement",
+              "quality_regulation",
+              "waiver",
+              "delivery_outcome"
+            ]
+          },
+          "occurred_at": { "type": "string", "format": "date" },
+          "received_at": { "type": "string", "format": "date" },
+          "source": { "type": "string" },
+          "confidential": { "type": "boolean" },
+          "allowed_roles": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "payload": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

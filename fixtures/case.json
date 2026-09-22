@@ -1,0 +1,217 @@
+{
+  "domain": "low-bid-quality-warning",
+  "version": 1,
+  "case_id": "case-2026-031",
+  "subject": "某结构件采购招标低价投标风险研判",
+  "bidders": [
+    { "id": "B1", "name": "华东机械有限公司" },
+    { "id": "B2", "name": "远衡制造有限公司" },
+    { "id": "B3", "name": "远衡配套件厂（关联企业）" },
+    { "id": "B4", "name": "鼎峰金属加工厂" }
+  ],
+  "events": [
+    {
+      "id": "e01",
+      "type": "tender_rule",
+      "occurred_at": "2026-01-05",
+      "received_at": "2026-01-05",
+      "source": "采购部门",
+      "payload": {
+        "material_items": [{ "code": "STEEL_A", "name": "主材型钢", "required_content": 120, "unit": "kg/件" }],
+        "rule": "投标报价明显低于主要材料成本的，应当组织成本复核后方可授标",
+        "quantity": 3000,
+        "delivery_window_months": 2
+      }
+    },
+    {
+      "id": "e02",
+      "type": "material_price_change",
+      "occurred_at": "2026-01-20",
+      "received_at": "2026-01-21",
+      "source": "行业价格指数",
+      "payload": { "material": "STEEL_A", "reference_price": 5.2, "change_pct": 0 }
+    },
+    {
+      "id": "e03",
+      "type": "bid_version",
+      "occurred_at": "2026-02-01",
+      "received_at": "2026-02-01",
+      "source": "评标系统",
+      "payload": { "bidder": "B1", "version": 1, "unit_price": 800 }
+    },
+    {
+      "id": "e04",
+      "type": "bid_version",
+      "occurred_at": "2026-02-01",
+      "received_at": "2026-02-01",
+      "source": "评标系统",
+      "payload": { "bidder": "B2", "version": 1, "unit_price": 680 }
+    },
+    {
+      "id": "e05",
+      "type": "bid_version",
+      "occurred_at": "2026-02-08",
+      "received_at": "2026-02-08",
+      "source": "评标系统",
+      "payload": { "bidder": "B2", "version": 2, "unit_price": 610, "change_note": "最终报价" }
+    },
+    {
+      "id": "e06",
+      "type": "verifiable_cost",
+      "occurred_at": "2026-02-09",
+      "received_at": "2026-02-10",
+      "source": "B2 提交（供应商锁价合同）",
+      "confidential": true,
+      "allowed_roles": ["审查人员"],
+      "payload": {
+        "bidder": "B2",
+        "material": "STEEL_A",
+        "locked_unit_price": 4.9,
+        "contract_end": "2026-12-31",
+        "document": "与上游钢厂年度锁价协议（商业秘密）"
+      }
+    },
+    {
+      "id": "e07",
+      "type": "capacity",
+      "occurred_at": "2026-02-10",
+      "received_at": "2026-02-11",
+      "source": "现场尽调",
+      "payload": { "bidder": "B2", "monthly_capacity": 1000, "monthly_committed": 200 }
+    },
+    {
+      "id": "e08",
+      "type": "delivery_history",
+      "occurred_at": "2026-02-11",
+      "received_at": "2026-02-12",
+      "source": "信用平台",
+      "payload": { "bidder": "B2", "on_time_rate": 0.97, "quality_pass_rate": 0.99, "period": "近三年" }
+    },
+    {
+      "id": "e09",
+      "type": "inspection",
+      "occurred_at": "2026-02-12",
+      "received_at": "2026-02-16",
+      "source": "第三方检测机构",
+      "payload": { "bidder": "B2", "sample_batch": "投标留样", "result": "pass", "items": ["材质单核对", "力学性能"] }
+    },
+    {
+      "id": "e10",
+      "type": "complaint",
+      "occurred_at": "2026-02-15",
+      "received_at": "2026-02-17",
+      "source": "采购人反馈通道",
+      "payload": {
+        "bidder": "B2",
+        "allegation": "2025年某批次型钢规格与合同不符",
+        "status": "核查中",
+        "case_ref": "TS-2025-117"
+      }
+    },
+    {
+      "id": "e11",
+      "type": "affiliate",
+      "occurred_at": "2026-02-16",
+      "received_at": "2026-02-17",
+      "source": "企业登记信息",
+      "payload": { "bidder": "B2", "affiliate": "B3", "relation": "同一实际控制人" }
+    },
+    {
+      "id": "e12",
+      "type": "joint_bid",
+      "occurred_at": "2026-02-08",
+      "received_at": "2026-02-18",
+      "source": "投标文件",
+      "payload": { "leaders": ["B2"], "members": ["B4"], "member_capacity": { "B4": 1500 }, "agreement_ref": "JBA-2026-7" }
+    },
+    {
+      "id": "e13",
+      "type": "appeal_supplement",
+      "occurred_at": "2026-02-18",
+      "received_at": "2026-02-25",
+      "source": "B2 申诉补证",
+      "payload": {
+        "bidder": "B2",
+        "items": [
+          { "kind": "process_patent", "detail": "省材工艺专利，宣称主材损耗降低8%", "verified": false },
+          { "kind": "locked_price", "detail": "年度锁价协议覆盖本批次", "verified": false }
+        ]
+      }
+    },
+    {
+      "id": "e14",
+      "type": "price_enforcement",
+      "occurred_at": "2025-11-20",
+      "received_at": "2026-02-22",
+      "source": "价格执法部门通报（迟到归集）",
+      "payload": {
+        "subject": "B3",
+        "finding": "另一项目以低于成本报价扰乱秩序，行政提示",
+        "penalty": "行政提示书",
+        "case_ref": "JG-2025-088"
+      }
+    },
+    {
+      "id": "e15",
+      "type": "quality_regulation",
+      "occurred_at": "2024-09-02",
+      "received_at": "2026-02-22",
+      "source": "质量监管部门通报（迟到归集）",
+      "payload": {
+        "subject": "B3",
+        "finding": "交付产品以低标号材料替代合同约定材料",
+        "penalty": "罚款并责令改正",
+        "case_ref": "ZL-2024-031"
+      }
+    },
+    {
+      "id": "e16",
+      "type": "waiver",
+      "occurred_at": "2026-02-20",
+      "received_at": "2026-02-20",
+      "source": "审查组负责人",
+      "payload": {
+        "bidder": "B2",
+        "decision": "暂缓成本复核，先行授标观察",
+        "expires_at": "2026-03-05",
+        "granted_by": "审查组负责人"
+      }
+    },
+    {
+      "id": "e17",
+      "type": "material_price_change",
+      "occurred_at": "2026-03-10",
+      "received_at": "2026-03-10",
+      "source": "行业价格指数",
+      "payload": { "material": "STEEL_A", "reference_price": 5.8, "change_pct": 11.5, "note": "原料价格突然上涨" }
+    },
+    {
+      "id": "e18",
+      "type": "delivery_outcome",
+      "occurred_at": "2026-06-18",
+      "received_at": "2026-06-20",
+      "source": "到货检验",
+      "payload": {
+        "bidder": "B2",
+        "batch": "第一批",
+        "result": "fail",
+        "finding": "实测主材含量112kg/件，低于约定120kg/件，材质证书与实物不一致",
+        "action": "退换货并暂停后续发货"
+      }
+    },
+    {
+      "id": "e19",
+      "type": "delivery_outcome",
+      "occurred_at": "2026-08-15",
+      "received_at": "2026-08-17",
+      "source": "到货检验",
+      "payload": {
+        "bidder": "B2",
+        "batch": "整改后第二、三批",
+        "result": "pass",
+        "finding": "主材含量复测120-121kg/件，材质证书一致",
+        "action": "恢复供货"
+      }
+    }
+  ]
+}
