@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "低价投标风险研判案件资料",
+  "type": "object",
+  "required": ["domain", "tender_id", "facts"],
+  "properties": {
+    "domain": {"const": "low-bid-quality-warning"},
+    "tender_id": {"type": "string", "minLength": 1},
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["fact_id", "category", "occurred_at", "payload"],
+        "properties": {
+          "fact_id": {"type": "string", "minLength": 1},
+          "category": {
+            "type": "string",
+            "enum": [
+              "tender_rule",
+              "bid_version",
+              "low_bid_signal",
+              "verifiable_cost",
+              "capacity",
+              "delivery_history",
+              "inspection",
+              "complaint",
+              "promotion_evidence",
+              "efficiency_evidence",
+              "material_price",
+              "hedging",
+              "affiliate",
+              "joint_bid",
+              "exemption",
+              "price_enforcement",
+              "quality_regulator",
+              "delivery_feedback"
+            ]
+          },
+          "occurred_at": {"type": "string", "format": "date-time"},
+          "received_at": {"type": "string", "format": "date-time"},
+          "source": {"type": "string"},
+          "clearance": {"enum": ["public", "internal", "trade_secret", 1, 2, 3]},
+          "authorized": {"type": "boolean"},
+          "supersedes": {"type": "array", "items": {"type": "string"}},
+          "payload": {"type": "object"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

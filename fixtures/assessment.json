@@ -1,0 +1,132 @@
+{
+  "domain": "low-bid-quality-warning",
+  "tender_id": "T-2026-041",
+  "facts": [
+    {
+      "fact_id": "rule-1",
+      "category": "tender_rule",
+      "occurred_at": "2026-08-20T09:00:00",
+      "payload": {"note": "招标文件要求主要材料品牌规格在报价中锁定"},
+      "source": "招标文件"
+    },
+    {
+      "fact_id": "bid-a1",
+      "category": "bid_version",
+      "occurred_at": "2026-09-01T10:00:00",
+      "payload": {"bidder": "甲公司", "version": 1, "unit_price": 118, "brand_locked": true},
+      "source": "开标记录"
+    },
+    {
+      "fact_id": "bid-a2",
+      "category": "bid_version",
+      "occurred_at": "2026-09-05T15:00:00",
+      "received_at": "2026-09-05T16:00:00",
+      "payload": {"bidder": "甲公司", "version": 2, "unit_price": 92, "brand_locked": false},
+      "source": "澄清后报价",
+      "supersedes": ["bid-a1"]
+    },
+    {
+      "fact_id": "bid-b1",
+      "category": "bid_version",
+      "occurred_at": "2026-09-01T10:05:00",
+      "payload": {"bidder": "乙公司", "version": 1, "unit_price": 130, "brand_locked": true},
+      "source": "开标记录"
+    },
+    {
+      "fact_id": "bid-c1",
+      "category": "bid_version",
+      "occurred_at": "2026-09-01T10:06:00",
+      "payload": {"bidder": "丙公司", "version": 1, "unit_price": 95, "brand_locked": true},
+      "source": "开标记录"
+    },
+    {
+      "fact_id": "signal-a",
+      "category": "low_bid_signal",
+      "occurred_at": "2026-09-06T09:00:00",
+      "payload": {"bidder": "甲公司", "note": "最低报价低于主要材料成本,触发预警"},
+      "source": "评标系统"
+    },
+    {
+      "fact_id": "cost-a",
+      "category": "verifiable_cost",
+      "occurred_at": "2026-09-06T10:00:00",
+      "clearance": "internal",
+      "payload": {"bidder": "甲公司", "material_cost_floor": 100, "breakdown_verified": false},
+      "source": "造价咨询"
+    },
+    {
+      "fact_id": "cap-a",
+      "category": "capacity",
+      "occurred_at": "2026-09-07T09:00:00",
+      "payload": {"bidder": "甲公司", "shortfall": false, "note": "现有产线可覆盖本批次"},
+      "source": "产能核查"
+    },
+    {
+      "fact_id": "hist-a",
+      "category": "delivery_history",
+      "occurred_at": "2026-09-07T10:00:00",
+      "payload": {"bidder": "甲公司", "on_time_rate": 0.97, "quality_finding": false},
+      "source": "履约系统"
+    },
+    {
+      "fact_id": "insp-a",
+      "category": "inspection",
+      "occurred_at": "2026-08-15T09:00:00",
+      "payload": {"bidder": "甲公司", "result": "pass", "material_verified": true, "note": "上一项目进场材料检验合格"},
+      "source": "质检机构"
+    },
+    {
+      "fact_id": "complaint-a",
+      "category": "complaint",
+      "occurred_at": "2026-06-01T09:00:00",
+      "clearance": "internal",
+      "payload": {"bidder": "甲公司", "topic": "substitution", "status": "upheld", "note": "2025年某项目材料以次充好投诉经查实"},
+      "source": "投诉平台"
+    },
+    {
+      "fact_id": "appeal-a",
+      "category": "promotion_evidence",
+      "occurred_at": "2026-09-08T09:00:00",
+      "clearance": "trade_secret",
+      "payload": {"bidder": "甲公司", "note": "企业申诉称新市场进入阶段性让价", "subsidy_proof": false, "scope_within_contract": true},
+      "source": "申诉材料"
+    },
+    {
+      "fact_id": "price-1",
+      "category": "material_price",
+      "occurred_at": "2026-09-10T00:00:00",
+      "received_at": "2026-09-18T09:00:00",
+      "payload": {"change_pct": 0.12, "note": "主材市场价投标后上涨"},
+      "source": "价格监测"
+    },
+    {
+      "fact_id": "aff-1",
+      "category": "affiliate",
+      "occurred_at": "2026-09-09T09:00:00",
+      "payload": {"entities": ["甲公司", "丙公司"], "note": "甲公司与丙公司受同一实际控制人控制"},
+      "source": "股权穿透"
+    },
+    {
+      "fact_id": "joint-1",
+      "category": "joint_bid",
+      "occurred_at": "2026-09-01T10:00:00",
+      "payload": {"members": ["乙公司", "丁公司"], "note": "乙公司与丁公司联合投标,需核验是否构成实体竞争"},
+      "source": "开标记录"
+    },
+    {
+      "fact_id": "exempt-a",
+      "category": "exemption",
+      "occurred_at": "2026-09-12T09:00:00",
+      "payload": {"bidder": "甲公司", "expires_at": "2026-09-20T00:00:00", "reason": "经办人暂缓复核等待申诉材料"},
+      "source": "人工豁免"
+    },
+    {
+      "fact_id": "reg-a",
+      "category": "price_enforcement",
+      "occurred_at": "2026-09-08T14:00:00",
+      "received_at": "2026-09-19T10:00:00",
+      "payload": {"bidder": "甲公司", "note": "价格执法部门低价线索核查中", "substitution_finding": false},
+      "source": "价格执法"
+    }
+  ]
+}
